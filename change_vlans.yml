@@ -1,0 +1,35 @@
+---
+- hosts: 192.168.178.40
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: arubaoss
+    ansible_user: root
+    ansible_password: <mysupersecretpw>
+    oldvlan: 300
+    newvlan: 400
+
+  tasks:
+
+  - name: ports to loop
+    set_fact:
+      ports_to_loop:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+
+  - name: change vlan {{ oldvlan }} to {{ newvlan }}
+    include_tasks: helper_change_vlans.yml
+    loop: "{{ ports_to_loop }}"
+    loop_control:
+      loop_var: port
+
+  - name: write conf to switch
+    arubaoss_command:
+      commands:
+        - 'conf'
+        - 'wr mem'
