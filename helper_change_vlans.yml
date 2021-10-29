@@ -1,4 +1,4 @@
-#regexpattern to match portatatus, also set default state of portstatus variable to not found
+#regexpattern to match portstatus, also set default state of portstatus variable to not found
 - set_fact:
     portstatus: "no vlan {{ oldvlan }} found"
     pattern_untagged: "\\b{{ oldvlan }}\\b.*Untagged"
