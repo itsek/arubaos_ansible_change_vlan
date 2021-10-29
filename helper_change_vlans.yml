@@ -1,8 +1,8 @@
 #regexpattern to match portatatus, also set default state of portstatus variable to not found
 - set_fact:
     portstatus: "no vlan {{ oldvlan }} found"
-    pattern_untagged: "{{ oldvlan }}.*Untagged"
-    pattern_tagged: "{{ oldvlan }}.*Tagged"
+    pattern_untagged: "\\b{{ oldvlan }}\\b.*Untagged"
+    pattern_tagged: "\\b{{ oldvlan }}\\b.*Tagged"
 
 - name: check all ports provided in the loop
   arubaoss_command:
